@@ -54,3 +54,4 @@ gem 'serialize_json-rails'
 
 gem 'bootstrap-sass'
 
+gem 'newrelic_rpm'
