@@ -1,17 +1,25 @@
 DeskPoll.Routers.Router = Backbone.Router.extend({  
   routes: {
-    '': 'deskSelection',
+    'user': 'deskSelection',
     'admin': 'adminDashboard'
   },
   
   deskSelection: function() {
-    var newVote = new DeskPoll.Models.Vote();
-
-    var deskSelectionView = new DeskPoll.Views.DeskSelectionView({
-      model: newVote
-    });
+    var view = this;
+    view.userVote;
+    $.get("/votes/current_vote", function(data) {
+      if (data) {
+        view.userVote = new DeskPoll.Models.Vote({id: data.id});
+        view.userVote.fetch();
+      } else {
+        view.userVote = new DeskPoll.Models.Vote();
+      }
+      var deskSelectionView = new DeskPoll.Views.DeskSelectionView({
+        model: view.userVote
+      });
     
-    this._swapView(deskSelectionView);
+      view._swapView(deskSelectionView);
+    });
   },
   
   adminDashboard: function() {

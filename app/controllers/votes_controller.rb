@@ -10,7 +10,12 @@ class VotesController < ApplicationController
   
   def show
     @vote = Vote.find(params[:id])
-    render :show
+    render partial: "votes/vote", locals: { vote: @vote }
+  end
+  
+  def current_vote
+    curr_vote = Vote.find_by_user_id(current_user.id)
+    render json: curr_vote
   end
   
   def create
@@ -22,7 +27,6 @@ class VotesController < ApplicationController
     else
       render json: @vote.errors.full_messages
     end
-    
   end
   
   def edit

@@ -1,0 +1,1 @@
+json.extract! curr_vote, :id, :desk_type

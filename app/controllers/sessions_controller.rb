@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       if @user.admin?
         redirect_to "#admin"
       else
-        redirect_to root_url
+        redirect_to "#user"
       end
     else
       flash.now[:errors] = ["Invalid username/password"]

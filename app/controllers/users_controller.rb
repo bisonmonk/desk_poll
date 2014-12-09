@@ -8,11 +8,15 @@ class UsersController < ApplicationController
 
     if @user.save
       sign_in!(@user)
-      redirect_to root_url
+      redirect_to "#user"
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new, status: 422
     end
+  end
+  
+  def current_voter
+    render json: current_user 
   end
   
   private
